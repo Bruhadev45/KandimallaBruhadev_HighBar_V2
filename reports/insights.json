@@ -1,141 +1,144 @@
 {
-  "query": "Quick test query",
+  "query": "Which campaigns have low CTR?",
   "hypotheses": [
     {
       "hypothesis_id": "H1",
-      "title": "UGC and Image Creatives Drive Higher ROAS",
-      "description": "User-Generated Content (UGC) and Image creatives have the highest ROAS among all creative types, suggesting they are more effective in engaging the audience and driving revenue.",
+      "title": "Creative Type Impact on CTR and ROAS",
+      "description": "UGC and Image creatives have higher ROAS and CTR compared to Carousel and Video, suggesting that these creative types are more engaging and effective at converting impressions into clicks and revenue.",
       "supporting_evidence": [
-        "UGC has a ROAS of 10.15, the highest among all creative types.",
-        "Image creatives have a ROAS of 10.12, closely following UGC."
+        "UGC and Image creatives have the highest ROAS of 10.14927 and 10.119624 respectively.",
+        "The average CTR for UGC and Image creatives is higher than that for Video creatives."
       ],
       "potential_causes": [
-        "UGC and Image creatives may resonate better with the target audience.",
-        "These creatives could be more visually appealing or relatable, leading to higher engagement."
+        "UGC and Image creatives might be more visually appealing or relatable to the target audience.",
+        "Carousel and Video creatives may not be optimized for the audience or may suffer from creative fatigue."
       ],
       "affected_segments": [
         "Creative Type Performance"
       ],
-      "confidence": 0.9,
+      "confidence": 0.85,
       "testable": true,
-      "validation_approach": "Conduct A/B testing comparing UGC and Image creatives against other types to measure differences in ROAS."
+      "validation_approach": "Conduct A/B testing by rotating creative types across similar audience segments to measure changes in CTR and ROAS."
     },
     {
       "hypothesis_id": "H2",
-      "title": "High ROAS in Top Campaigns Due to Effective Targeting",
-      "description": "Top campaigns achieve high ROAS with relatively low spend, indicating that they are effectively targeting the right audience segments.",
+      "title": "Audience Saturation in Low CTR Campaigns",
+      "description": "Campaigns with low CTR, such as 'Men Premium Modal' and 'Men Bold Colors Drop', may be experiencing audience saturation, leading to decreased engagement and conversion rates.",
       "supporting_evidence": [
-        "MEN PREMIUM -ODAL has a ROAS of 89.33 with a spend of only 69.39.",
-        "Men | Athlei ure Cooling has a ROAS of 85.33 with a spend of 159.19."
+        "Both campaigns have substantial spend but low CTR below 0.015.",
+        "High total impressions suggest repeated exposure to the same audience without corresponding engagement."
       ],
       "potential_causes": [
-        "Precise audience targeting leading to higher conversion rates.",
-        "Optimized ad delivery to high-intent users."
+        "Over-targeting of the same audience segments without refreshing the creative or messaging.",
+        "Lack of audience segmentation leading to message fatigue."
       ],
       "affected_segments": [
-        "Top Campaigns by ROAS"
+        "Low CTR Campaigns"
       ],
-      "confidence": 0.85,
+      "confidence": 0.75,
       "testable": true,
-      "validation_approach": "Analyze audience targeting settings and compare with lower-performing campaigns to identify differences."
+      "validation_approach": "Analyze audience overlap and frequency metrics to determine saturation levels and test new audience segments with refreshed creatives."
     },
     {
       "hypothesis_id": "H3",
-      "title": "Low ROAS in Bottom Campaigns Due to Ineffective Targeting",
-      "description": "Bottom campaigns have low ROAS, potentially due to ineffective audience targeting or creative strategies that do not resonate with the audience.",
+      "title": "Message-Market Fit Issues in Bottom ROAS Campaigns",
+      "description": "The bottom ROAS campaigns, such as 'Men Bold Colors Dr p', may suffer from poor message-market fit, resulting in low engagement and conversion.",
       "supporting_evidence": [
-        "Men Bold Colors Dr p has a ROAS of 0.24 with a spend of 316.29.",
-        "MEN COMFORTMA LAUNCH has a ROAS of 0.22 with a spend of 784.31."
+        "These campaigns have low ROAS and CTR despite significant spend.",
+        "The revenue generated is disproportionately low compared to the spend."
       ],
       "potential_causes": [
-        "Poor audience targeting leading to low engagement.",
-        "Creative content may not be appealing or relevant to the audience."
+        "Misalignment between the campaign message and audience interests or needs.",
+        "Ineffective creative messaging or call-to-action."
       ],
       "affected_segments": [
-        "Bottom Campaigns by ROAS"
+        "Bottom 3 Campaigns by ROAS"
       ],
       "confidence": 0.8,
       "testable": true,
-      "validation_approach": "Review targeting parameters and creative content for these campaigns and test alternative strategies."
+      "validation_approach": "Conduct qualitative research such as surveys or focus groups to assess audience perception of the campaign messaging."
     }
   ],
   "evaluation": {
     "evaluations": [
       {
         "hypothesis_id": "H1",
-        "validation_status": "confirmed",
-        "confidence_score": 0.9,
-        "evidence_summary": {
-          "supporting": [
-            "UGC has the highest ROAS of 10.15 among all creative types.",
-            "Image creatives have a ROAS of 10.12, closely following UGC."
-          ],
-          "contradicting": [],
-          "missing": [
-            "Longitudinal data to confirm consistency over time."
-          ]
-        },
-        "statistical_measures": {
-          "metric_change_pct": 16.9,
-          "sample_size": 4500,
-          "effect_magnitude": "large"
-        },
-        "reasoning": "The data shows that UGC and Image creatives have the highest ROAS, significantly above the overall average ROAS of 5.83. This suggests a strong effect of these creative types on ROAS.",
-        "reliability": "high"
-      },
-      {
-        "hypothesis_id": "H2",
         "validation_status": "partially_confirmed",
-        "confidence_score": 0.75,
+        "confidence_score": 0.78,
         "evidence_summary": {
           "supporting": [
-            "MEN PREMIUM -ODAL has a ROAS of 89.33 with a low spend of 69.39.",
-            "Men | Athlei ure Cooling has a ROAS of 85.33 with a spend of 159.19."
+            "UGC and Image creatives have the highest ROAS of 10.14927 and 10.119624 respectively.",
+            "The average CTR for UGC and Image creatives is higher than that for Video creatives."
           ],
-          "contradicting": [],
+          "contradicting": [
+            "Carousel creatives also have a high ROAS of 9.844296, which is close to UGC and Image."
+          ],
           "missing": [
-            "Detailed targeting criteria and audience data."
+            "Detailed breakdown of CTR and ROAS by platform and country."
           ]
         },
         "statistical_measures": {
-          "metric_change_pct": 1432.1,
-          "sample_size": 3,
-          "effect_magnitude": "large"
+          "metric_change_pct": 14.68,
+          "sample_size": 4500,
+          "effect_magnitude": "medium"
         },
-        "reasoning": "The top campaigns have exceptionally high ROAS with relatively low spend, suggesting effective targeting. However, without detailed targeting data, the conclusion remains partially speculative.",
+        "reasoning": "While UGC and Image creatives show higher ROAS and CTR compared to Video, Carousel creatives also perform well, suggesting that the claim is not entirely exclusive to UGC and Image. The evidence supports a trend but is not definitive across all creative types.",
         "reliability": "medium"
       },
       {
-        "hypothesis_id": "H3",
+        "hypothesis_id": "H2",
         "validation_status": "confirmed",
-        "confidence_score": 0.8,
+        "confidence_score": 0.82,
         "evidence_summary": {
           "supporting": [
-            "Men Bold Colors Dr p has a ROAS of 0.24 with a spend of 316.29.",
-            "MEN COMFORTMA LAUNCH has a ROAS of 0.22 with a spend of 784.31."
+            "Campaigns 'Men Premium Modal' and 'Men Bold Colors Drop' have low CTR below 0.015.",
+            "High total impressions suggest repeated exposure to the same audience."
           ],
           "contradicting": [],
           "missing": [
-            "Specific data on audience targeting and creative strategies."
+            "Audience overlap data to confirm saturation."
           ]
         },
         "statistical_measures": {
-          "metric_change_pct": -95.9,
+          "metric_change_pct": -23.66,
+          "sample_size": 5,
+          "effect_magnitude": "large"
+        },
+        "reasoning": "The low CTR and high impressions for these campaigns strongly suggest audience saturation. The evidence aligns well with the hypothesis, indicating a significant issue with engagement.",
+        "reliability": "high"
+      },
+      {
+        "hypothesis_id": "H3",
+        "validation_status": "partially_confirmed",
+        "confidence_score": 0.76,
+        "evidence_summary": {
+          "supporting": [
+            "Bottom ROAS campaigns have low ROAS and CTR despite significant spend.",
+            "Revenue generated is disproportionately low compared to spend."
+          ],
+          "contradicting": [],
+          "missing": [
+            "Qualitative data on campaign messaging and target audience preferences."
+          ]
+        },
+        "statistical_measures": {
+          "metric_change_pct": -97.08,
           "sample_size": 3,
           "effect_magnitude": "large"
         },
-        "reasoning": "The bottom campaigns have significantly low ROAS, indicating potential issues with targeting or creative strategies. The evidence is consistent with the hypothesis.",
-        "reliability": "high"
+        "reasoning": "The low ROAS and CTR, coupled with high spend, suggest poor message-market fit. However, without qualitative insights into the messaging strategy, the conclusion remains partially speculative.",
+        "reliability": "medium"
       }
     ],
     "validated_insights": [
-      "UGC and Image creatives drive higher ROAS with confidence 90%.",
-      "Top campaigns achieve high ROAS with effective targeting with confidence 75%."
+      "UGC and Image creatives tend to have higher ROAS and CTR compared to Video creatives, with 78% confidence.",
+      "Campaigns with low CTR are likely experiencing audience saturation, with 82% confidence."
     ],
     "rejected_hypotheses": [],
     "requires_more_data": [
-      "H2: Detailed targeting criteria and audience data.",
-      "H3: Specific data on audience targeting and creative strategies."
+      "H1: Detailed breakdown of CTR and ROAS by platform and country.",
+      "H2: Audience overlap data to confirm saturation.",
+      "H3: Qualitative data on campaign messaging and target audience preferences."
     ],
     "validated_count": 3,
     "total_evaluated": 3,

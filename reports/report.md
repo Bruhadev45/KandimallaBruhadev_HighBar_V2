@@ -1,67 +1,67 @@
 # Facebook Ads Performance Analysis Report
 
 ## Query
-Quick test query
+Which campaigns have low CTR?
 
 ## Executive Summary
 
 Analyzed 3 hypotheses and validated 3 key insights.
 
 **Top Issues Identified:**
-1. UGC and Image creatives drive higher ROAS with confidence 90%.
-2. Top campaigns achieve high ROAS with effective targeting with confidence 75%.
+1. UGC and Image creatives tend to have higher ROAS and CTR compared to Video creatives, with 78% confidence.
+2. Campaigns with low CTR are likely experiencing audience saturation, with 82% confidence.
 
 **Actionable Recommendations:** 2 campaigns identified for creative optimization.
 
 
 ## Key Findings
 
-- UGC and Image creatives drive higher ROAS with confidence 90%.
-- Top campaigns achieve high ROAS with effective targeting with confidence 75%.
+- UGC and Image creatives tend to have higher ROAS and CTR compared to Video creatives, with 78% confidence.
+- Campaigns with low CTR are likely experiencing audience saturation, with 82% confidence.
 
 ## Detailed Hypotheses
 
 ### H1
-**Status**: confirmed
-**Confidence**: 90.00%
+**Status**: partially_confirmed
+**Confidence**: 78.00%
 
-The data shows that UGC and Image creatives have the highest ROAS, significantly above the overall average ROAS of 5.83. This suggests a strong effect of these creative types on ROAS.
+While UGC and Image creatives show higher ROAS and CTR compared to Video, Carousel creatives also perform well, suggesting that the claim is not entirely exclusive to UGC and Image. The evidence supports a trend but is not definitive across all creative types.
 
 ### H2
-**Status**: partially_confirmed
-**Confidence**: 75.00%
+**Status**: confirmed
+**Confidence**: 82.00%
 
-The top campaigns have exceptionally high ROAS with relatively low spend, suggesting effective targeting. However, without detailed targeting data, the conclusion remains partially speculative.
+The low CTR and high impressions for these campaigns strongly suggest audience saturation. The evidence aligns well with the hypothesis, indicating a significant issue with engagement.
 
 ### H3
-**Status**: confirmed
-**Confidence**: 80.00%
+**Status**: partially_confirmed
+**Confidence**: 76.00%
 
-The bottom campaigns have significantly low ROAS, indicating potential issues with targeting or creative strategies. The evidence is consistent with the hypothesis.
+The low ROAS and CTR, coupled with high spend, suggest poor message-market fit. However, without qualitative insights into the messaging strategy, the conclusion remains partially speculative.
 
 ## Creative Recommendations
 
 ### Men Bold Colors Drop
-**Issue**: Low CTR and ROAS due to generic messaging and lack of differentiation.
+**Issue**: Low CTR and ROAS due to audience saturation and lack of engaging creative format.
 
 #### Variant 1: UGC
-**Message**: Discover why men love our breathable athletic briefs. Endorsed by real customers for ultimate comfort and style.
-**Rationale**: UGC has shown high ROAS. Leveraging real customer testimonials can enhance trust and engagement.
+**Message**: See why men love our cooling mesh panels — breathable comfort endorsed by real users.
+**Rationale**: UGC format has shown higher engagement and trust, leveraging social proof.
 
-#### Variant 2: Carousel
-**Message**: Explore our range of cooling mesh briefs. Perfect for workouts and everyday wear.
-**Rationale**: Carousel format allows showcasing multiple product benefits and styles, increasing engagement.
+#### Variant 2: Image
+**Message**: Experience the no ride-up guarantee with our best-selling athletic briefs. Perfect for summer workouts.
+**Rationale**: Image creatives have higher engagement; focuses on specific product benefits.
 
 ### women Summer Invisible
-**Issue**: Messaging lacks urgency and personalization, leading to lower engagement.
+**Issue**: Creative lacks differentiation and fails to highlight unique product benefits.
 
-#### Variant 1: Image
-**Message**: Experience seamless comfort with our wire-free bras. Limited time offer!
-**Rationale**: Creating urgency with a limited-time offer can increase CTR and ROAS.
+#### Variant 1: Carousel
+**Message**: Swipe to discover our wire-free bras and panties — invisible under any outfit.
+**Rationale**: Carousel format allows showcasing multiple products and benefits, increasing engagement.
 
-#### Variant 2: Video
-**Message**: Watch how our seamless panties transform your everyday comfort. Perfect for any outfit.
-**Rationale**: Video format can effectively demonstrate product benefits and increase engagement.
+#### Variant 2: UGC
+**Message**: Real women share their love for our seamless panties — comfort you can trust.
+**Rationale**: UGC builds trust through authentic testimonials, enhancing credibility.
 
 
 ## Data Summary
@@ -82,4 +82,4 @@ Dataset Overview:
 ```
 
 ---
-*Generated: 2025-11-26T09:28:07.281965*
+*Generated: 2025-11-26T09:45:18.790191*
