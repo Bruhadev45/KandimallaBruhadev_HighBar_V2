@@ -71,7 +71,9 @@ class AgentOrchestrator:
                     f"{self.data_agent.data_quality_report['total_rows']} rows loaded.",
                     inputs={"data_path": self.data_agent.data_path},
                     outputs={
-                        "quality_score": self.data_agent.data_quality_report["data_quality_score"],
+                        "quality_score": self.data_agent.data_quality_report[
+                            "data_quality_score"
+                        ],
                         "total_rows": self.data_agent.data_quality_report["total_rows"],
                     },
                 )
@@ -120,7 +122,12 @@ class AgentOrchestrator:
                 "insight_agent",
                 f"Generated {num_hypotheses} hypotheses",
                 f"Based on analysis of {len(self.state['analysis'].get('key_findings', []))} key findings from data",
-                inputs={"query": query, "findings_count": len(self.state["analysis"].get("key_findings", []))},
+                inputs={
+                    "query": query,
+                    "findings_count": len(
+                        self.state["analysis"].get("key_findings", [])
+                    ),
+                },
                 outputs={"hypotheses_generated": num_hypotheses},
             )
 
@@ -149,7 +156,10 @@ class AgentOrchestrator:
                 f"Validated {validated_count}/{total_count} hypotheses",
                 f"Applied confidence threshold of {self.config['thresholds']['confidence_min']}. "
                 f"Rejected {rejected_count} hypotheses due to insufficient evidence or low confidence.",
-                inputs={"hypotheses_count": total_count, "threshold": self.config["thresholds"]["confidence_min"]},
+                inputs={
+                    "hypotheses_count": total_count,
+                    "threshold": self.config["thresholds"]["confidence_min"],
+                },
                 outputs={"validated": validated_count, "rejected": rejected_count},
             )
 
@@ -163,7 +173,10 @@ class AgentOrchestrator:
                 f"Selected {len(low_ctr)} low-performing and {len(top_perf)} top-performing campaigns",
                 f"Using CTR threshold of {self.config['thresholds']['low_ctr_threshold']} "
                 f"and ROAS threshold of {self.config['thresholds']['low_roas_threshold']}",
-                inputs={"low_ctr_count": len(low_ctr), "top_performers_count": len(top_perf)},
+                inputs={
+                    "low_ctr_count": len(low_ctr),
+                    "top_performers_count": len(top_perf),
+                },
             )
 
             self.state["creatives"] = self.creative_generator.execute(
@@ -187,7 +200,10 @@ class AgentOrchestrator:
                 f"Generated {total_recs} creative recommendations",
                 f"{linked_recs} recommendations tightly linked to validated insights. "
                 f"All recommendations address specific diagnosed issues.",
-                outputs={"total_recommendations": total_recs, "linked_recommendations": linked_recs},
+                outputs={
+                    "total_recommendations": total_recs,
+                    "linked_recommendations": linked_recs,
+                },
             )
 
             # Step 7: Generate final report

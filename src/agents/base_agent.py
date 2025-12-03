@@ -154,7 +154,7 @@ class BaseAgent(ABC):
                 json_str = re.sub(r",\s*]", "]", json_str)
                 try:
                     return json.loads(json_str)
-                except:
+                except (json.JSONDecodeError, ValueError):
                     pass
 
             # Last resort: print the response for debugging

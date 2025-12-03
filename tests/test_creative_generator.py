@@ -1,13 +1,13 @@
 """Tests for Creative Generator Agent."""
 
-import pytest
 import sys
 from pathlib import Path
-import pandas as pd
 
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
+import pytest
+import pandas as pd
 from agents.creative_generator import CreativeGeneratorAgent
 
 
@@ -226,18 +226,31 @@ def test_creative_generator_format_none_dataframe(config):
 
 
 def test_creative_generator_format_insights(config):
-    """Test insights formatting."""
+    """Test insights formatting with evidence."""
     client = MockClient()
     agent = CreativeGeneratorAgent(config, client)
 
-    insights = {"validated_insights": ["Insight 1", "Insight 2", "Insight 3"]}
+    insights = {
+        "evaluations": [
+            {
+                "hypothesis_id": "H1",
+                "confidence": 0.85,
+                "validation_status": "confirmed",
+                "evidence": {
+                    "metric": "roas",
+                    "segment": "Campaign A",
+                    "baseline_value": 5.0,
+                    "current_value": 3.5,
+                },
+                "impact": "high",
+            }
+        ]
+    }
 
-    formatted = agent._format_insights(insights)
+    formatted = agent._format_insights_with_evidence(insights)
 
-    assert "Key Insights:" in formatted
-    assert "- Insight 1" in formatted
-    assert "- Insight 2" in formatted
-    assert "- Insight 3" in formatted
+    assert "VALIDATED INSIGHTS" in formatted
+    assert "H1" in formatted
 
 
 def test_creative_generator_format_empty_insights(config):
@@ -245,11 +258,11 @@ def test_creative_generator_format_empty_insights(config):
     client = MockClient()
     agent = CreativeGeneratorAgent(config, client)
 
-    insights = {"validated_insights": []}
+    insights = {"evaluations": []}
 
-    formatted = agent._format_insights(insights)
+    formatted = agent._format_insights_with_evidence(insights)
 
-    assert "No validated insights available" in formatted
+    assert "No validated insights" in formatted
 
 
 def test_creative_generator_format_missing_insights(config):
@@ -259,7 +272,7 @@ def test_creative_generator_format_missing_insights(config):
 
     insights = {}
 
-    formatted = agent._format_insights(insights)
+    formatted = agent._format_insights_with_evidence(insights)
 
     assert "No validated insights available" in formatted
 

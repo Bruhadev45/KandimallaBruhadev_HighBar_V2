@@ -2,7 +2,7 @@
 
 import pandas as pd
 import numpy as np
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Tuple
 import logging
 
 logger = logging.getLogger(__name__)
@@ -127,14 +127,18 @@ class DataValidator:
             removed_rows = initial_rows - len(df)
 
             if removed_rows > 0:
-                logger.warning(f"Removed {removed_rows} invalid rows ({removed_rows/initial_rows*100:.1f}%)")
+                logger.warning(
+                    f"Removed {removed_rows} invalid rows ({removed_rows/initial_rows*100:.1f}%)"
+                )
 
             logger.info(f"Data cleaning complete. Final shape: {df.shape}")
 
             # Final validation
             is_valid, errors = DataValidator.validate_schema(df)
             if not is_valid:
-                raise ValueError(f"Data validation failed after cleaning: {', '.join(errors)}")
+                raise ValueError(
+                    f"Data validation failed after cleaning: {', '.join(errors)}"
+                )
 
             return df
 
@@ -147,7 +151,9 @@ class DataValidator:
         """Add missing optional columns with defaults."""
         for col, default_value in DataValidator.OPTIONAL_COLUMNS.items():
             if col not in df.columns and col not in DataValidator.COMPUTED_COLUMNS:
-                logger.warning(f"Missing column '{col}', adding with default: {default_value}")
+                logger.warning(
+                    f"Missing column '{col}', adding with default: {default_value}"
+                )
                 df[col] = default_value
         return df
 
@@ -160,7 +166,9 @@ class DataValidator:
             # Check for unparseable dates
             null_dates = df["date"].isna().sum()
             if null_dates > 0:
-                logger.warning(f"Found {null_dates} unparseable dates, will remove these rows")
+                logger.warning(
+                    f"Found {null_dates} unparseable dates, will remove these rows"
+                )
 
         except Exception as e:
             logger.error(f"Error parsing dates: {str(e)}")
@@ -211,7 +219,9 @@ class DataValidator:
             if col in df.columns:
                 nulls = df[col].isna().sum()
                 if nulls > 0:
-                    logger.warning(f"Filling {nulls} missing values in '{col}' with {default}")
+                    logger.warning(
+                        f"Filling {nulls} missing values in '{col}' with {default}"
+                    )
                     df[col] = df[col].fillna(default)
 
         # Fill categorical columns
@@ -229,7 +239,9 @@ class DataValidator:
             if col in df.columns:
                 nulls = df[col].isna().sum()
                 if nulls > 0:
-                    logger.warning(f"Filling {nulls} missing values in '{col}' with '{default}'")
+                    logger.warning(
+                        f"Filling {nulls} missing values in '{col}' with '{default}'"
+                    )
                     df[col] = df[col].fillna(default)
 
         return df
@@ -242,7 +254,9 @@ class DataValidator:
         for col in numeric_cols:
             inf_count = np.isinf(df[col]).sum()
             if inf_count > 0:
-                logger.warning(f"Column '{col}': Replacing {inf_count} infinity values with NaN")
+                logger.warning(
+                    f"Column '{col}': Replacing {inf_count} infinity values with NaN"
+                )
                 df[col] = df[col].replace([np.inf, -np.inf], np.nan)
 
         return df
@@ -271,7 +285,9 @@ class DataValidator:
         if "ctr" in df.columns:
             invalid_ctr = ((df["ctr"] < 0) | (df["ctr"] > 1)).sum()
             if invalid_ctr > 0:
-                logger.warning(f"Found {invalid_ctr} rows with CTR outside [0, 1], clamping")
+                logger.warning(
+                    f"Found {invalid_ctr} rows with CTR outside [0, 1], clamping"
+                )
                 df["ctr"] = df["ctr"].clip(0, 1)
 
         # Negative spend/revenue/clicks/impressions don't make sense
@@ -280,14 +296,18 @@ class DataValidator:
             if col in df.columns:
                 negative_count = (df[col] < 0).sum()
                 if negative_count > 0:
-                    logger.warning(f"Found {negative_count} negative values in '{col}', setting to 0")
+                    logger.warning(
+                        f"Found {negative_count} negative values in '{col}', setting to 0"
+                    )
                     df[col] = df[col].clip(lower=0)
 
         # ROAS > 100 is suspicious (100x return is extremely unlikely)
         if "roas" in df.columns:
             suspicious_roas = (df["roas"] > 100).sum()
             if suspicious_roas > 0:
-                logger.warning(f"Found {suspicious_roas} rows with ROAS > 100 (suspicious)")
+                logger.warning(
+                    f"Found {suspicious_roas} rows with ROAS > 100 (suspicious)"
+                )
 
         return df
 

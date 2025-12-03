@@ -65,7 +65,7 @@ test-coverage:
 # Code quality targets
 lint:
 	@echo "Running flake8..."
-	flake8 src tests --max-line-length=88 --extend-ignore=E203,W503
+	flake8 src tests
 	@echo "✓ Flake8 passed"
 
 format:

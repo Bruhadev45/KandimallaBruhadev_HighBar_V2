@@ -59,7 +59,9 @@ class EvaluatorAgent(BaseAgent):
             evaluation["validated_count"] = len(validated_evals)
             evaluation["total_evaluated"] = len(evaluation.get("evaluations", []))
             evaluation["confidence_threshold"] = confidence_min
-            evaluation["rejected_count"] = len(evaluation.get("rejected_hypotheses", []))
+            evaluation["rejected_count"] = len(
+                evaluation.get("rejected_hypotheses", [])
+            )
 
             # Log validation summary
             logger.info(
@@ -81,7 +83,9 @@ class EvaluatorAgent(BaseAgent):
                 "error": str(e),
             }
 
-    def _validate_evaluation_structure(self, evaluation: Dict[str, Any]) -> Dict[str, Any]:
+    def _validate_evaluation_structure(
+        self, evaluation: Dict[str, Any]
+    ) -> Dict[str, Any]:
         """Validate that evaluation has required structure with evidence.
 
         Args:
@@ -181,7 +185,9 @@ class EvaluatorAgent(BaseAgent):
         """
         validated = []
         for eval_item in evaluations:
-            confidence = eval_item.get("confidence", eval_item.get("confidence_score", 0))
+            confidence = eval_item.get(
+                "confidence", eval_item.get("confidence_score", 0)
+            )
 
             # Must meet confidence threshold
             if confidence < confidence_min:

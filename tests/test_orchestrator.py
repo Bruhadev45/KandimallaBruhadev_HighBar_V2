@@ -1,15 +1,13 @@
 """Integration tests for Agent Orchestrator."""
 
-import pytest
 import sys
 from pathlib import Path
-import pandas as pd
-import tempfile
-import os
 
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
+import pytest
+import pandas as pd
 from orchestrator.orchestrator import AgentOrchestrator
 
 

@@ -4,7 +4,6 @@ from typing import Dict, Any
 import pandas as pd
 from .base_agent import BaseAgent
 import logging
-import json
 
 logger = logging.getLogger(__name__)
 
@@ -29,7 +28,9 @@ class CreativeGeneratorAgent(BaseAgent):
             Dictionary with creative recommendations linked to specific diagnoses
         """
         try:
-            logger.info("Generating creative recommendations linked to validated insights")
+            logger.info(
+                "Generating creative recommendations linked to validated insights"
+            )
 
             # Format data for prompt with emphasis on linkage
             low_perf_text = self._format_dataframe(low_performers, "Low Performers")
@@ -58,7 +59,9 @@ class CreativeGeneratorAgent(BaseAgent):
             recommendations = self.parse_json_response(response)
 
             # Validate linkage
-            recommendations = self._validate_recommendation_linkage(recommendations, insights)
+            recommendations = self._validate_recommendation_linkage(
+                recommendations, insights
+            )
 
             # Add metadata
             recommendations["total_recommendations"] = len(
@@ -118,7 +121,9 @@ class CreativeGeneratorAgent(BaseAgent):
 
         for eval_item in insights.get("evaluations", []):
             # Only include validated insights
-            confidence = eval_item.get("confidence", eval_item.get("confidence_score", 0))
+            confidence = eval_item.get(
+                "confidence", eval_item.get("confidence_score", 0)
+            )
             status = eval_item.get("validation_status", "")
 
             if confidence >= 0.6 and status not in ["refuted", "insufficient_data"]:
@@ -139,10 +144,14 @@ class CreativeGeneratorAgent(BaseAgent):
                     formatted.append(
                         f"  Change: {evidence.get('relative_delta_pct', 'N/A')}%"
                     )
-                    formatted.append(f"  Sample size: {evidence.get('sample_size', 'N/A')}")
+                    formatted.append(
+                        f"  Sample size: {evidence.get('sample_size', 'N/A')}"
+                    )
 
                 formatted.append(f"Impact: {eval_item.get('impact', 'N/A')}")
-                formatted.append(f"Affected campaigns: {eval_item.get('affected_campaigns', [])}")
+                formatted.append(
+                    f"Affected campaigns: {eval_item.get('affected_campaigns', [])}"
+                )
                 formatted.append("-" * 60)
 
         if len(formatted) == 2:  # Only header
@@ -186,9 +195,7 @@ class CreativeGeneratorAgent(BaseAgent):
                 )
 
             if "diagnosed_issue" not in rec:
-                warnings.append(
-                    f"Recommendation {i+1} missing 'diagnosed_issue' field"
-                )
+                warnings.append(f"Recommendation {i+1} missing 'diagnosed_issue' field")
 
         if warnings:
             logger.warning(f"Recommendation linkage issues: {'; '.join(warnings)}")

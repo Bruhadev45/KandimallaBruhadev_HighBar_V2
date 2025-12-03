@@ -1,7 +1,6 @@
 """Shared test fixtures and utilities."""
 
 import pytest
-from typing import Dict, Any
 
 
 class MockMessage:

@@ -21,7 +21,7 @@ class InsightAgent(BaseAgent):
             "insight_agent_prompt.md", context=context, data_summary=data_summary
         )
 
-        system = """You are an expert marketing analyst. Generate clear, testable hypotheses 
+        system = """You are an expert marketing analyst. Generate clear, testable hypotheses
         that explain performance patterns. Focus on actionable insights. Always output valid JSON."""
 
         response = self.call_llm(prompt, system=system)

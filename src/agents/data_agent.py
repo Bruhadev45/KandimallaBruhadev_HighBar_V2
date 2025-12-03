@@ -2,8 +2,7 @@
 
 from typing import Dict, Any, Optional, List
 import pandas as pd
-import numpy as np
-from datetime import datetime, timedelta
+from datetime import timedelta
 from .base_agent import BaseAgent
 from utils.data_validation import DataValidator
 import logging
@@ -43,7 +42,9 @@ class DataAgent(BaseAgent):
 
                 # Load raw data
                 self.df = pd.read_csv(self.data_path)
-                logger.info(f"Loaded {len(self.df)} rows, {len(self.df.columns)} columns")
+                logger.info(
+                    f"Loaded {len(self.df)} rows, {len(self.df.columns)} columns"
+                )
 
                 # Pre-validation schema check
                 is_valid, errors = DataValidator.validate_schema(self.df)
@@ -57,10 +58,14 @@ class DataAgent(BaseAgent):
                 # Post-validation check
                 is_valid, errors = DataValidator.validate_schema(self.df)
                 if not is_valid:
-                    raise ValueError(f"Data validation failed after cleaning: {'; '.join(errors)}")
+                    raise ValueError(
+                        f"Data validation failed after cleaning: {'; '.join(errors)}"
+                    )
 
                 # Generate data quality report
-                self.data_quality_report = DataValidator.get_data_quality_report(self.df)
+                self.data_quality_report = DataValidator.get_data_quality_report(
+                    self.df
+                )
                 logger.info(
                     f"Data quality score: {self.data_quality_report['data_quality_score']:.1f}/100"
                 )
@@ -119,9 +124,6 @@ Dataset Overview:
         """
         df = self.load_data()
 
-        # Prepare data summary for LLM
-        data_desc = self.get_data_summary()
-
         # Add specific analysis based on task
         analysis_data = self._perform_analysis(df, task_description)
 
@@ -164,13 +166,19 @@ Dataset Overview:
             baseline_end = max_date - timedelta(days=7)
 
             current_period = df[df["date"] > current_start]
-            baseline_period = df[(df["date"] > baseline_start) & (df["date"] <= baseline_end)]
+            baseline_period = df[
+                (df["date"] > baseline_start) & (df["date"] <= baseline_end)
+            ]
 
             analysis.append("=" * 60)
             analysis.append("BASELINE vs CURRENT PERFORMANCE COMPARISON")
             analysis.append("=" * 60)
-            analysis.append(f"Baseline Period: {baseline_start.date()} to {baseline_end.date()}")
-            analysis.append(f"Current Period: {current_start.date()} to {max_date.date()}")
+            analysis.append(
+                f"Baseline Period: {baseline_start.date()} to {baseline_end.date()}"
+            )
+            analysis.append(
+                f"Current Period: {current_start.date()} to {max_date.date()}"
+            )
             analysis.append("")
 
             # Overall metrics comparison
@@ -190,20 +198,30 @@ Dataset Overview:
             )
 
             for campaign in top_campaigns:
-                baseline_camp = baseline_period[baseline_period["campaign_name"] == campaign]
-                current_camp = current_period[current_period["campaign_name"] == campaign]
+                baseline_camp = baseline_period[
+                    baseline_period["campaign_name"] == campaign
+                ]
+                current_camp = current_period[
+                    current_period["campaign_name"] == campaign
+                ]
 
                 if len(baseline_camp) > 0 and len(current_camp) > 0:
                     analysis.append(f"\nCampaign: {campaign}")
                     analysis.extend(
-                        self._compare_periods(baseline_camp, current_camp, campaign, indent=2)
+                        self._compare_periods(
+                            baseline_camp, current_camp, campaign, indent=2
+                        )
                     )
 
             # Creative type analysis
             analysis.append("\n--- CREATIVE TYPE PERFORMANCE ---")
             for creative_type in df["creative_type"].unique():
-                baseline_creative = baseline_period[baseline_period["creative_type"] == creative_type]
-                current_creative = current_period[current_period["creative_type"] == creative_type]
+                baseline_creative = baseline_period[
+                    baseline_period["creative_type"] == creative_type
+                ]
+                current_creative = current_period[
+                    current_period["creative_type"] == creative_type
+                ]
 
                 if len(baseline_creative) > 10 and len(current_creative) > 10:
                     analysis.append(f"\n{creative_type}:")
@@ -216,8 +234,12 @@ Dataset Overview:
             # Platform analysis
             analysis.append("\n--- PLATFORM PERFORMANCE ---")
             for platform in df["platform"].unique():
-                baseline_platform = baseline_period[baseline_period["platform"] == platform]
-                current_platform = current_period[current_period["platform"] == platform]
+                baseline_platform = baseline_period[
+                    baseline_period["platform"] == platform
+                ]
+                current_platform = current_period[
+                    current_period["platform"] == platform
+                ]
 
                 if len(baseline_platform) > 0 and len(current_platform) > 0:
                     analysis.append(f"\n{platform}:")
@@ -246,9 +268,7 @@ Dataset Overview:
             )
 
             if len(low_ctr_campaigns) > 0:
-                analysis.append(
-                    f"\nCampaigns with CTR < {low_ctr_threshold}:"
-                )
+                analysis.append(f"\nCampaigns with CTR < {low_ctr_threshold}:")
                 analysis.append(low_ctr_campaigns.to_string())
 
             logger.info("Performance analysis complete")
@@ -288,12 +308,16 @@ Dataset Overview:
             # Calculate metrics for both periods
             metrics = {
                 "ROAS": (
-                    baseline["revenue"].sum() / baseline["spend"].sum()
-                    if baseline["spend"].sum() > 0
-                    else 0,
-                    current["revenue"].sum() / current["spend"].sum()
-                    if current["spend"].sum() > 0
-                    else 0,
+                    (
+                        baseline["revenue"].sum() / baseline["spend"].sum()
+                        if baseline["spend"].sum() > 0
+                        else 0
+                    ),
+                    (
+                        current["revenue"].sum() / current["spend"].sum()
+                        if current["spend"].sum() > 0
+                        else 0
+                    ),
                 ),
                 "CTR": (baseline["ctr"].mean(), current["ctr"].mean()),
                 "Spend": (baseline["spend"].sum(), current["spend"].sum()),
