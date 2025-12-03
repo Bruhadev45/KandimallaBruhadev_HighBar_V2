@@ -180,10 +180,10 @@ def test_data_agent_perform_analysis_roas(config, sample_data):
 
     analysis = agent._perform_analysis(sample_data, "analyze roas drop")
 
-    assert "ROAS Trend:" in analysis
-    assert "Last 7 days:" in analysis
-    assert "Previous 7 days:" in analysis
-    assert "Change:" in analysis
+    # V2 format uses "BASELINE vs CURRENT" with arrow comparisons
+    assert "BASELINE vs CURRENT" in analysis or "ROAS:" in analysis
+    assert "→" in analysis  # Arrow symbol used in V2 comparisons
+    assert "Δ" in analysis or "Change:" in analysis  # Delta symbol or Change text
 
 
 def test_data_agent_perform_analysis_ctr(config, sample_data):
@@ -194,7 +194,12 @@ def test_data_agent_perform_analysis_ctr(config, sample_data):
 
     analysis = agent._perform_analysis(sample_data, "analyze ctr performance")
 
-    assert "Low CTR Campaigns" in analysis or "Creative Type Performance" in analysis
+    # V2 format uses "CREATIVE TYPE PERFORMANCE" or "LOW PERFORMING CAMPAIGNS"
+    assert (
+        "CREATIVE TYPE PERFORMANCE" in analysis
+        or "LOW PERFORMING CAMPAIGNS" in analysis
+        or "CTR:" in analysis
+    )
 
 
 def test_data_agent_get_low_ctr_campaigns(config, sample_data):
